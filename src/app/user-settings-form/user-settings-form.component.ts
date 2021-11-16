@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
+import { DataService } from '../data/data.service';
 import { UserSettings } from '../data/user-settings';
 
 @Component({
@@ -18,12 +19,25 @@ export class UserSettingsFormComponent implements OnInit {
 
   userSettings: UserSettings = { ...this.originalUserSettings };
 
-  constructor() {}
+  error = false;
+  errorMessage = '';
+
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {}
 
+  onError(err: any) {
+    console.error(`Error Occured: ${err}`);
+    this.error = true;
+    this.errorMessage = 'A 400 error occured';
+  }
+
   onSubmit(form: NgForm) {
     console.log(`Submitting form, valid: ${form.valid}`);
+    this.dataService.postUserSettingsForm(this.userSettings).subscribe(
+      (result) => console.log('SUCCESS: ', result),
+      (err) => this.onError(err)
+    );
   }
 
   onBlur(nameField: NgModel) {
