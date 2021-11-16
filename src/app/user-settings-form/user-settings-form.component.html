@@ -14,20 +14,23 @@
         #nameField="ngModel"
         required
         minlength="3"
+        [ngClass]="{
+          'invalid-control':
+            (nameField.touched || nameField.dirty) && nameField.invalid
+        }"
       />
-    </div>
-
-    <div class="form-group" style="border: 1px solid red; padding: 3px">
-      <p>untouched: {{ nameField.untouched }}</p>
-      <p>touched: {{ nameField.touched }}</p>
-      <hr />
-      <p>pristine: {{ nameField.pristine }}</p>
-      <p>dirty: {{ nameField.dirty }}</p>
-      <hr />
-      <p>valid: {{ nameField.valid }}</p>
-      <p>invalid: {{ nameField.invalid }}</p>
-      <hr />
-      <p>errors: {{ nameField.errors | json }}</p>
+      <div
+        class="alert alert-danger"
+        *ngIf="(nameField.touched || nameField.dirty) && nameField.errors?.['required']"
+      >
+        Please enter a name.
+      </div>
+      <div
+        class="alert alert-danger"
+        *ngIf="(nameField.touched || nameField.dirty) && nameField.errors?.['minlength']"
+      >
+        Please enter a name longer than 2 characters.
+      </div>
     </div>
 
     <div class="form-group form-check">
@@ -107,7 +110,7 @@
       ></textarea>
     </div>
 
-    <button class="btn btn-primary">Send</button>
+    <button class="btn btn-primary" [disabled]="form.invalid">Send</button>
   </form>
 </div>
 <hr />
