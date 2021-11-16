@@ -8,11 +8,11 @@ import { UserSettings } from '../data/user-settings';
 })
 export class UserSettingsFormComponent implements OnInit {
   originalUserSettings: UserSettings = {
-    name: 'Ryouta Kise',
-    emailOffers: true,
-    userInterfaceStyle: 'dark',
-    subscriptionType: 'Lifetime',
-    notes: 'Aominechi I will defeat you.',
+    name: null,
+    emailOffers: null,
+    userInterfaceStyle: null,
+    subscriptionType: null,
+    notes: null,
   };
 
   userSettings: UserSettings = { ...this.originalUserSettings };
