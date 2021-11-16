@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 import { DataService } from '../data/data.service';
 import { UserSettings } from '../data/user-settings';
 
@@ -21,10 +22,13 @@ export class UserSettingsFormComponent implements OnInit {
 
   error = false;
   errorMessage = '';
+  subscriptionTypes: Observable<string[]> = of([]);
 
   constructor(private dataService: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscriptionTypes = this.dataService.getSubscriptionTypes();
+  }
 
   onError(err: any) {
     console.error(`Error Occured: ${err}`);
