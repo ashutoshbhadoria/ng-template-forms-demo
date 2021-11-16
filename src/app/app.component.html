@@ -1,7 +1,7 @@
 <div class="container">
   <h2>User Settings</h2>
 
-  <form>
+  <form #form="ngForm">
     <div class="form-group">
       <label for="name">Name</label>
       <input
@@ -10,6 +10,7 @@
         id="name"
         name="name"
         placeholder="Name"
+        ngModel
       />
     </div>
 
@@ -19,6 +20,7 @@
         class="form-check-input"
         id="emailOffers"
         name="emailOffers"
+        ngModel
       />
       <label class="form-check-label" for="emailOffers"
         >Email Special Offers</label
@@ -36,6 +38,7 @@
           id="lightInterface"
           value="light"
           checked
+          ngModel
         />
         <label class="form-check-label" for="lightInterface"> Light </label>
       </div>
@@ -46,6 +49,7 @@
           name="userInterfaceStyle"
           id="mediumInterface"
           value="medium"
+          ngModel
         />
         <label class="form-check-label" for="mediumInterface"> Medium </label>
       </div>
@@ -56,6 +60,7 @@
           name="userInterfaceStyle"
           id="darkInterface"
           value="dark"
+          ngModel
         />
         <label class="form-check-label" for="darkInterface"> Dark </label>
       </div>
@@ -67,6 +72,7 @@
         class="form-control"
         id="subscriptionType"
         name="subscriptionType"
+        ngModel
       >
         <option>Monthly</option>
         <option>Annual</option>
@@ -81,9 +87,12 @@
         id="notes"
         name="notes"
         rows="3"
+        ngModel
       ></textarea>
     </div>
 
     <button class="btn btn-primary">Send</button>
   </form>
 </div>
+<hr />
+<h3>Form Value: {{ form.value | json }}</h3>
